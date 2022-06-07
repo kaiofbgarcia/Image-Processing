@@ -132,10 +132,9 @@ let binary = function () {
     for (var i = 0; i < img.width; i++) {
         for (var j = 0; j < img.height; j++) {
             var pixel = img.getPixel(i,j);
-            var media = (pixel.red + pixel.green + pixel.blue) / 3; 
-            if(media > 127){
+            if(pixel.red> 127){
                 img.setPixel(i, j, new RGBColor(255, 255, 255));
-            } else if(media <= 127){
+            } else if(pixel.red <= 127){
                 img.setPixel(i, j, new RGBColor(0, 0, 0));
             }
         }
