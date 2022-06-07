@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="description" content="Image Processing Pixel by Pixel, based on code of Prof. Wellington Della Mura.">
+        <meta name="keywords" content="Image Processing, Computer Graphics, UENP, JavaScript.">
+        <meta name="author" content="Kaio Felipe Barbosa Garcia">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Image Processing</title>
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <script src="main.js" defer></script>
+    </head>
+    <body>
+        <input type="file" id="fileLoader" class="hidden">
+        <div class="container mx-auto">
+            <h1 class="h1 text-center font-bold text-2xl">Image Processing</h1>
+            <div class="mb-4 mt-4">
+                <button class="bg-red-900 text-white font-bold py-1 px-2" 
+                id="btnLoad">Load image</button>
+                <button class="bg-gray-500 text-white font-bold py-1 px-2" 
+                id="btnGray">Grayscale</button>
+
+                <button class= "bg-red-500 text-white font-bold py-1 px-2" 
+                id="btnRed2">Red2</button>
+
+                <button class= "bg-red-500 text-white font-bold py-1 px-2" 
+                id="btnRed">Red</button>
+
+                <button class= "bg-green-500 text-white font-bold py-1 px-2" 
+                id="btnGreen">Green</button>
+
+                <button class= "bg-blue-500 text-white font-bold py-1 px-2" 
+                id="btnBlue">Blue</button>
+                
+                <button class="bg-yellow-400 text-white font-bold py-1 px-2" 
+                id="btnMean">Mean</button>
+                
+                <button class="bg-blue-300 text-white font-bold py-1 px-2" 
+                id="btnBrightnessPlus"> + Brightness</button>
+
+                <button class="bg-gray-700 text-white font-bold py-1 px-2" 
+                id="btnBrightnessMinus"> - Brightness</button>
+
+                <button class="bg-black text-white font-bold py-1 px-2" 
+                id="btnBinary">Binary</button>
+
+                <button class="bg-pink-900 text-white font-bold py-1 px-2" 
+                id="btnFlipH">FlipH</button>
+
+                <button class="bg-pink-900 text-white font-bold py-1 px-2" 
+                id="btnFlipV">FlipV</button>
+
+                <div id="container"></div>
+                <div id="controls">
+                    Contrast:
+                    <input
+                        id="contrast"
+                        type="range"
+                        min="-100"
+                        max="100"
+                        step="1"
+                        value="0"
+                    />
+                </div>
+            </div>
+            <div class="flex">
+                <div class="w-1/2 border-2 p-3 mr-3">
+                    <h1 class="font-bold text-2xl text-center pb-4">Original</h1>
+                    <img id="image" src="images/clown-fish.jpg" class="m-auto" />
+                </div>
+                <div class="w-1/2 border-2 p-3">
+                    <h1 class="font-bold text-2xl text-center pb-4">Processed</h1>
+                    <canvas id="image-canvas" class="m-auto"></canvas>                
+                </div>
+            </div>
+            <br>
+            <a href="contrast.html" class="button">Contrast</a><br>
+            <a href="flip.html" class="button">Flip</a>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/konva@8.3.5/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Konva Contrast Image Demo</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+
+      #controls {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+      }
+
+      a.button {
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        text-decoration: none;
+        color: initial;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container"></div>
+    <div id="controls">
+      Contrast:
+      <input
+        id="contrast"
+        type="range"
+        min="-100"
+        max="100"
+        step="1"
+        value="0"
+      />
+    </div>
+    <script>
+      Konva.Image.fromURL('images/seal.jpg', function (lion) {
+        var stage = new Konva.Stage({
+          container: 'container',
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+
+        var layer = new Konva.Layer();
+
+        lion.position({
+          x: 50,
+          y: 50,
+        });
+        lion.cache();
+        lion.filters([Konva.Filters.Contrast]);
+        layer.add(lion);
+        stage.add(layer);
+
+        var sliders = ['contrast'];
+        sliders.forEach(function (attr) {
+          var slider = document.getElementById(attr);
+          function update() {
+            lion[attr](parseFloat(slider.value));
+          }
+          slider.oninput = update;
+          update();
+        });
+      });
+    </script>
+  </body>
+</html>
