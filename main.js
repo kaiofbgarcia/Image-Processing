@@ -157,14 +157,28 @@ function flipImage(image, ctx, flipH, flipV) {
 let flipH = function () {
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     let img = new MatrixImage(imageData);
-    context.scale(-1,1);
+    for (var i = 0; i < img.width/2; i++) {
+        for (var j = 0; j < img.height; j++) {
+            var pixel = img.getPixel(i,j);
+            var aux = img.width-1;
+            img.setPixel(i, j, new RGBColor(img.getPixel(aux-i, j).red, img.getPixel(aux-i, j).green, img.getPixel(aux-i, j).blue));
+            img.setPixel(aux-i, j, new RGBColor(pixel.red, pixel.green, pixel.blue));
+        }
+    }
     context.putImageData(img.imageData, 0, 0);
 }
 
 let flipV = function () {
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     let img = new MatrixImage(imageData);
-    context.scale(-1,1);
+    for (var i = 0 ; i < img.width ; i++) {
+        for (var j = 0 ; j < img.height/2 ; j++) {
+            var pixel = img.getPixel(i,j);
+            var aux = img.height-1;
+            img.setPixel(i, j, new RGBColor(img.getPixel(i, aux-j).red, img.getPixel(i, aux-j).green, img.getPixel(i, aux-j).blue));
+            img.setPixel(i, aux-j, new RGBColor(pixel.red, pixel.green, pixel.blue));
+        }
+    }
     context.putImageData(img.imageData, 0, 0);
 }
 
