@@ -130,14 +130,22 @@ let mean = function() {
 let median = function () {
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     let img = new MatrixImage(imageData);
-    for (var i = 0; i < img.width; i++) {
-        for (var j = 0; j < img.height; j++) {
-            var pixel = img.getPixel(i,j);
-            
-            
-              
-            
-            img.setPixel(i, j, new RGBColor(pixel.red, pixel.green, pixel.blue));
+    for (var i = 2; i < img.width-2; i++) {
+        for (var j = 2; j < img.height-2; j++) {
+            var pixel = Array();
+            pixel.push(img.getPixel(i-1,j-1).red);
+            pixel.push(img.getPixel(i-1,j).red);
+            pixel.push(img.getPixel(i,j-1).red);
+            pixel.push(img.getPixel(i+1,j-1).red);
+            pixel.push(img.getPixel(i,j).red);
+            pixel.push(img.getPixel(i-1,j+1).red);
+            pixel.push(img.getPixel(i,j+1).red);
+            pixel.push(img.getPixel(i+1,j).red);
+            pixel.push(img.getPixel(i+1,j+1).red);
+
+            var median = pixel.sort()[4];
+    
+            img.setPixel(i, j, new RGBColor(median, median, median));
         }
     }
 
