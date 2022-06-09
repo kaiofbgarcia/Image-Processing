@@ -127,7 +127,24 @@ let mean = function() {
     context.putImageData(img.imageData, 0, 0);
 }
 
-let a = function () {
+let median = function () {
+    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    let img = new MatrixImage(imageData);
+    for (var i = 0; i < img.width; i++) {
+        for (var j = 0; j < img.height; j++) {
+            var pixel = img.getPixel(i,j);
+            
+            
+              
+            
+            img.setPixel(i, j, new RGBColor(pixel.red, pixel.green, pixel.blue));
+        }
+    }
+
+    context.putImageData(img.imageData, 0, 0);
+}
+
+let gaussean = function () {
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     let img = new MatrixImage(imageData);
     for (var i = 0; i < img.width; i++) {
@@ -222,7 +239,6 @@ let rotate90 = function () {
 }
 
 let contrast = function () {
-
 }
 
 class RGBColor {
@@ -261,6 +277,8 @@ class MatrixImage {
 document.getElementById('btnLoad').addEventListener('click', load);
 document.getElementById('btnGray').addEventListener('click', grayScale);
 document.getElementById('btnMean').addEventListener('click', mean);
+document.getElementById('btnMedian').addEventListener('click', median);
+document.getElementById('btnGaussean').addEventListener('click', gaussean);
 document.getElementById('btnRed').addEventListener('click', red);
 document.getElementById('btnRed2').addEventListener('click', red2);
 document.getElementById('btnGreen').addEventListener('click', green);
