@@ -31,29 +31,6 @@ let grayScale = function() {
     context.putImageData(img.imageData, 0, 0);
 }
 
-let mean = function() {
-    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    let img = new MatrixImage(imageData);
-    for (var i = 2; i < img.width-2; i++) {
-        for (var j = 2; j < img.height-2; j++) {
-            var pixel = Array();
-            pixel.push(img.getPixel(i-1,j-1).red);
-            pixel.push(img.getPixel(i-1,j).red);
-            pixel.push(img.getPixel(i,j-1).red);
-            pixel.push(img.getPixel(i+1,j-1).red);
-            pixel.push(img.getPixel(i,j).red);
-            pixel.push(img.getPixel(i-1,j+1).red);
-            pixel.push(img.getPixel(i,j+1).red);
-            pixel.push(img.getPixel(i+1,j).red);
-            pixel.push(img.getPixel(i+1,j+1).red);
-            var gray = pixel.reduce((a, b) => a + b, 0) / 9;
-    
-            img.setPixel(i, j, new RGBColor(gray, gray, gray));
-        }
-    }
-    context.putImageData(img.imageData, 0, 0);
-}
-
 let red = function () {
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     let img = new MatrixImage(imageData);
@@ -126,6 +103,42 @@ let blue2 = function () {
     context.putImageData(img.imageData, 0, 0);
 }
 
+
+let mean = function() {
+    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    let img = new MatrixImage(imageData);
+    for (var i = 2; i < img.width-2; i++) {
+        for (var j = 2; j < img.height-2; j++) {
+            var pixel = Array();
+            pixel.push(img.getPixel(i-1,j-1).red);
+            pixel.push(img.getPixel(i-1,j).red);
+            pixel.push(img.getPixel(i,j-1).red);
+            pixel.push(img.getPixel(i+1,j-1).red);
+            pixel.push(img.getPixel(i,j).red);
+            pixel.push(img.getPixel(i-1,j+1).red);
+            pixel.push(img.getPixel(i,j+1).red);
+            pixel.push(img.getPixel(i+1,j).red);
+            pixel.push(img.getPixel(i+1,j+1).red);
+            var gray = pixel.reduce((a, b) => a + b, 0) / 9;
+    
+            img.setPixel(i, j, new RGBColor(gray, gray, gray));
+        }
+    }
+    context.putImageData(img.imageData, 0, 0);
+}
+
+let a = function () {
+    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    let img = new MatrixImage(imageData);
+    for (var i = 0; i < img.width; i++) {
+        for (var j = 0; j < img.height; j++) {
+            var pixel = img.getPixel(i,j);
+            img.setPixel(i, j, new RGBColor(pixel.red*2, pixel.green*2, pixel.blue*2));
+        }
+    }
+    context.putImageData(img.imageData, 0, 0);
+}
+
 let brightnessPlus = function () {
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     let img = new MatrixImage(imageData);
@@ -166,18 +179,6 @@ let binary = function () {
     context.putImageData(img.imageData, 0, 0);
 }
 
-function flipImage(image, ctx, flipH, flipV) {
-    var scaleH = flipH ? -1 : 1, // Set horizontal scale to -1 if flip horizontal
-        scaleV = flipV ? -1 : 1, // Set verical scale to -1 if flip vertical
-        posX = flipH ? canvas.width * -1 : 0, // Set x position to -100% if flip horizontal 
-        posY = flipV ? canvas.height * -1 : 0; // Set y position to -100% if flip vertical
-    
-    ctx.save(); // Save the current state
-    ctx.scale(scaleH, scaleV); // Set scale to flip the image
-    ctx.drawImage(img, posX, posY, width, height); // draw the image
-    ctx.restore(); // Restore the last saved state
-};
-
 let flipH = function () {
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     let img = new MatrixImage(imageData);
@@ -204,6 +205,24 @@ let flipV = function () {
         }
     }
     context.putImageData(img.imageData, 0, 0);
+}
+
+let rotate90 = function () {
+    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    let img = new MatrixImage(imageData);
+    for (var i = 0 ; i < img.width ; i++) {
+        for (var j = 0 ; j < img.height/2 ; j++) {
+            var pixel = img.getPixel(i,j);
+            var aux = img.height-1;
+            img.setPixel(i, j, new RGBColor(img.getPixel(i, aux-j).red, img.getPixel(i, aux-j).green, img.getPixel(i, aux-j).blue));
+            img.setPixel(i, aux-j, new RGBColor(pixel.red, pixel.green, pixel.blue));
+        }
+    }
+    context.putImageData(img.imageData, 0, 0);
+}
+
+let contrast = function () {
+
 }
 
 class RGBColor {
@@ -253,3 +272,4 @@ document.getElementById('btnBrightnessMinus').addEventListener('click', brightne
 document.getElementById('btnBinary').addEventListener('click', binary);
 document.getElementById('btnFlipV').addEventListener('click', flipV);
 document.getElementById('btnFlipH').addEventListener('click', flipH);
+document.getElementById('btnRotate90').addEventListener('click', rotate90);

@@ -15,32 +15,42 @@
         <div class="container mx-auto">
             <h1 class="h1 text-center font-bold text-2xl">Image Processing</h1>
             <div class="mb-4 mt-4">
-                <button class="bg-red-900 text-white font-bold py-1 px-2" 
-                id="btnLoad">Load image</button>
+                <div class="flex justify-center">
+                    <button class="bg-red-900 text-white text-xl border-black py-2 px-4 rounded-full" 
+                    id="btnLoad">Load image</button>
+                </div>
+                <br>
+
                 <button class="bg-gray-500 text-white font-bold py-1 px-2" 
                 id="btnGray">Grayscale</button>
 
                 <button class= "bg-red-500 text-white font-bold py-1 px-2" 
                 id="btnRed">Red</button>
 
-                <button class= "bg-red-500 text-white font-bold py-1 px-2" 
+                <button class= "bg-red-400 text-white font-bold py-1 px-2" 
                 id="btnRed2">Red2</button>
 
                 <button class= "bg-green-500 text-white font-bold py-1 px-2" 
                 id="btnGreen">Green</button>
 
-                <button class= "bg-green-500 text-white font-bold py-1 px-2" 
+                <button class= "bg-green-400 text-white font-bold py-1 px-2" 
                 id="btnGreen2">Green2</button>
 
                 <button class= "bg-blue-500 text-white font-bold py-1 px-2" 
                 id="btnBlue">Blue</button>
 
-                <button class= "bg-blue-500 text-white font-bold py-1 px-2" 
+                <button class= "bg-blue-400 text-white font-bold py-1 px-2" 
                 id="btnBlue2">Blue2</button>
                 
-                <button class="bg-yellow-400 text-white font-bold py-1 px-2" 
+                <button class="bg-yellow-300 text-white font-bold py-1 px-2" 
                 id="btnMean">Mean</button>
                 
+                <button class="bg-yellow-500 text-white font-bold py-1 px-2" 
+                id="btnMean">Median</button>
+
+                <button class="bg-yellow-700 text-white font-bold py-1 px-2" 
+                id="btnMean">Gaussean</button>                
+
                 <button class="bg-blue-300 text-white font-bold py-1 px-2" 
                 id="btnBrightnessPlus"> + Brightness</button>
 
@@ -55,18 +65,12 @@
 
                 <button class="bg-pink-900 text-white font-bold py-1 px-2" 
                 id="btnFlipV">FlipV</button>
-
-                <div id="container"></div>
-                <div id="controls">
-                    Contrast:
-                    <input
-                        id="contrast"
-                        type="range"
-                        min="-100"
-                        max="100"
-                        step="1"
-                        value="0"
-                    />
+                
+                <button class="bg-pink-600 text-white font-bold py-1 px-2" 
+                id="btnRotate90">Rotate 90º</button>
+                
+                <input type="range" id="customRange1"/>
+                
                 </div>
             </div>
             <div class="flex">
