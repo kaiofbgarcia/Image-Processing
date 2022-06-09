@@ -90,6 +90,18 @@ let green = function () {
     context.putImageData(img.imageData, 0, 0);
 }
 
+let green2 = function () {
+    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    let img = new MatrixImage(imageData);
+    for (var i = 0; i < img.width; i++) {
+        for (var j = 0; j < img.height; j++) {
+            var pixel = img.getPixel(i,j);
+            img.setPixel(i, j, new RGBColor(pixel.red, pixel.red, pixel.red));
+        }
+    }
+    context.putImageData(img.imageData, 0, 0);
+}
+
 let blue = function () {
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     let img = new MatrixImage(imageData);
@@ -97,6 +109,18 @@ let blue = function () {
         for (var j = 0; j < img.height; j++) {
             var pixel = img.getPixel(i,j); 
             img.setPixel(i, j, new RGBColor(0, 0, pixel.blue));
+        }
+    }
+    context.putImageData(img.imageData, 0, 0);
+}
+
+let blue2 = function () {
+    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    let img = new MatrixImage(imageData);
+    for (var i = 0; i < img.width; i++) {
+        for (var j = 0; j < img.height; j++) {
+            var pixel = img.getPixel(i,j);
+            img.setPixel(i, j, new RGBColor(pixel.red, pixel.red, pixel.red));
         }
     }
     context.putImageData(img.imageData, 0, 0);
@@ -221,7 +245,9 @@ document.getElementById('btnMean').addEventListener('click', mean);
 document.getElementById('btnRed').addEventListener('click', red);
 document.getElementById('btnRed2').addEventListener('click', red2);
 document.getElementById('btnGreen').addEventListener('click', green);
+document.getElementById('btnGreen2').addEventListener('click', green2);
 document.getElementById('btnBlue').addEventListener('click', blue);
+document.getElementById('btnBlue2').addEventListener('click', blue2);
 document.getElementById('btnBrightnessPlus').addEventListener('click', brightnessPlus);
 document.getElementById('btnBrightnessMinus').addEventListener('click', brightnessMinus);
 document.getElementById('btnBinary').addEventListener('click', binary);
