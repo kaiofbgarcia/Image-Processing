@@ -3,7 +3,6 @@ var image = document.getElementById('image');
 var canvas = document.getElementById('image-canvas');
 var context = null;
 
-
 let loadFromFile = function(){
     fileLoader.click();
     fileLoader.addEventListener('input', ()=>{
@@ -148,17 +147,16 @@ let median = function () {
             img.setPixel(i, j, new RGBColor(median, median, median));
         }
     }
-
     context.putImageData(img.imageData, 0, 0);
 }
 
 let gaussean = function () {
     let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     let img = new MatrixImage(imageData);
-    for (var i = 0; i < img.width; i++) {
-        for (var j = 0; j < img.height; j++) {
-            var pixel = img.getPixel(i,j);
-            img.setPixel(i, j, new RGBColor(pixel.red*2, pixel.green*2, pixel.blue*2));
+    for (var i = 2; i < img.width-2; i++) {
+        for (var j = 2; j < img.height-2; j++) {
+            var gaus = (img.getPixel(i,j).red*(1/4)+((img.getPixel(i-1,j).red + img.getPixel(i,j-1).red + img.getPixel(i,j+1).red + img.getPixel(i+1,j).red) * (1/8)) + ((img.getPixel(i+1,j-1).red + img.getPixel(i-1,j+1).red + img.getPixel(i-1,j-1).red + img.getPixel(i+1,j+1).red) * (1/16)));    
+            img.setPixel(i, j, new RGBColor(gaus, gaus, gaus));
         }
     }
     context.putImageData(img.imageData, 0, 0);
