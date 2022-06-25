@@ -230,20 +230,6 @@ let flipV = function () {
     context.putImageData(img.imageData, 0, 0);
 }
 
-let rotate90 = function () {
-    let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-    let img = new MatrixImage(imageData);
-    for (var i = 0 ; i < img.width ; i++) {
-        for (var j = 0 ; j < img.height/2 ; j++) {
-            var pixel = img.getPixel(i,j);
-            var aux = img.height-1;
-            img.setPixel(i, j, new RGBColor(img.getPixel(i, aux-j).red, img.getPixel(i, aux-j).green, img.getPixel(i, aux-j).blue));
-            img.setPixel(i, aux-j, new RGBColor(pixel.red, pixel.green, pixel.blue));
-        }
-    }
-    context.putImageData(img.imageData, 0, 0);
-}
-
 let contrast = function () {
 }
 
@@ -264,7 +250,6 @@ class MatrixImage {
 
     getPixel(x, y) {
         let position = ((y * (this.width * 4)) + (x * 4));
-
         return new RGBColor(
              this.imageData.data[position],   //red
              this.imageData.data[position+1], //green
@@ -296,4 +281,3 @@ document.getElementById('btnBrightnessMinus').addEventListener('click', brightne
 document.getElementById('btnBinary').addEventListener('click', binary);
 document.getElementById('btnFlipV').addEventListener('click', flipV);
 document.getElementById('btnFlipH').addEventListener('click', flipH);
-document.getElementById('btnRotate90').addEventListener('click', rotate90);
